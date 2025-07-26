@@ -1,0 +1,108 @@
+/* Font importok */
+@import url("https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Rasa:ital,wght@0,300..700;1,300..700&family=Tourney:wght@100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=DynaPuff:wght@400..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Onest:wght@100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
+/* Alapstílusok */
+.logo-text {
+  font-family: "DynaPuff";
+}
+
+.nav-item {
+  @apply block py-2;
+}
+
+.nav-link {
+  @apply py-2 px-6 text-white font-semibold text-lg rounded-2xl transition-all duration-300 flex items-center backdrop-blur-sm shadow-lg hover:shadow-xl hover:scale-105;
+}
+
+.temu_gradient {
+  @apply bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700;
+}
+
+.secondary-gradient {
+  @apply bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600;
+}
+
+.tertiary-gradient {
+  @apply bg-gradient-to-b from-sky-800 via-sky-500/85 to-sky-800;
+}
+
+.nav-link-subtle {
+  @apply py-2 px-4 text-white/90 font-medium text-lg rounded-2xl transition-all duration-300 hover:bg-white/10 hover:text-white flex items-center backdrop-blur-sm;
+}
+
+.action-button {
+  @apply py-2 px-6 bg-gradient-to-r from-rose-500 to-rose-600 text-white font-semibold text-lg rounded-2xl transition-all duration-300 hover:from-rose-600 hover:to-rose-700 shadow-lg hover:shadow-xl hover:scale-105 flex items-center;
+}
+
+.dashboard-icon {
+  @apply p-3 text-rose-400 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:text-rose-300 backdrop-blur-sm flex items-center justify-center text-xl hover:scale-110;
+}
+
+.aboutus,
+.whoweare,
+.support,
+.showonnews {
+  font-size: 16px;
+}
+
+.nav-link,
+.nav-link-subtle,
+.action-button,
+.dashboard-icon {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::after,
+.nav-link-subtle::after,
+.action-button::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.8s ease-out;
+}
+
+.nav-link:hover::after,
+.nav-link-subtle:hover::after,
+.action-button:hover::after {
+  transform: translateX(100%);
+}
+
+/* Reszponzív beállítások */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .logo {
+    width: 100px;
+    height: 100px;
+  }
+  /* .hambuger-menu {
+    @apply w-10 min-h-10;
+  } */
+  .mobile-nav {
+    @apply mb-4;
+  }
+  .nav-link {
+    @apply min-w-[220px];
+  }
+
+  .movingcalculator,
+  .aboutus,
+  .whoweare,
+  .support,
+  .showonnews {
+    font-size: 16px;
+  }
+}
