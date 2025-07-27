@@ -9,8 +9,8 @@ class AdminAuthController extends Controller
 {
     public function login(Request $request): JsonResponse
     {
-        $adminUser = 'Metin2MigrationAdminPanelLogin';               
-        $adminPass = 'verytitkosítottjelszohash';  
+        $adminUser = env('ADMIN_USER');
+        $adminPass = env('ADMIN_PASS');
         $inputUser = $request->input('username') ?? '';
         $inputPass = $request->input('password') ?? '';
         if ($inputUser === $adminUser && $inputPass === $adminPass) {

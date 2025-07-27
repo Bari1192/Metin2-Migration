@@ -28,7 +28,7 @@
       <ul class="hidden lg:flex flex-1 flex-row flex-wrap justify-end items-center gap-4 w-full">
 
         <li class="nav-item">
-          <RouterLink to="/movingcalculator" class="movingcalculator" @click="toggleMenu">
+          <RouterLink to="/adminpanel" class="movingcalculator" @click="toggleMenu">
             <div class="nav-link secondary-gradient">
               <i class="fa-solid fa-calculator mr-2"></i>
               <p class="movingcalculator">Moving Calculator</p>
@@ -98,7 +98,7 @@
           </button>
           <ul class="nav-item-group mx-3">
             <li class="nav-item">
-              <RouterLink to="/movingcalculator" class="movingcalculator" @click="toggleMenu">
+              <RouterLink to="/adminpanel" class="movingcalculator" @click="toggleMenu">
                 <div class="nav-link secondary-gradient">
                   <i class="fa-solid fa-calculator mr-2"></i>
                   <p class="movingcalculator">Moving Calculator</p>

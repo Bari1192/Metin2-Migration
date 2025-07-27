@@ -1,22 +1,22 @@
 import { createRouter, createWebHistory } from "vue-router";
 import IndexPage from "@pages/index.vue";
-import MovingCalculator from "@pages/calculators/movingcalculator.vue";
 import MarketSearching from "@pages/calculators/MarketSearching.vue";
+import AdminLoginPanel from "@pages/calculators/adminloginpanel.vue";
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: IndexPage, 
+    component: IndexPage,
   },
   {
-    path: "/movingcalculator",
-    name: "Moving Calculator",
-    component: MovingCalculator, 
+    path: "/adminpanel",
+    name: "Admin Login Panel",
+    component: AdminLoginPanel,
   },
   {
     path: "/marketsearch",
     name: "Market Searching",
-    component: MarketSearching, 
+    component: MarketSearching,
   },
 ];
 export const router = createRouter({
