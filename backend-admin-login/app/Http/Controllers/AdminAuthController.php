@@ -14,12 +14,9 @@ class AdminAuthController extends Controller
         $inputUser = $request->input('username') ?? '';
         $inputPass = $request->input('password') ?? '';
         if ($inputUser === $adminUser && $inputPass === $adminPass) {
-            $token = bin2hex(random_bytes(32));
-            return response()->json([
-                'success' => true,
-                'token' => $token
-            ]);
+            return response()->json(['success' => true]);
         }
+        // statikus .env-es token van, nem generáltatok neki! secret key-es env-es!
         return response()->json([
             'success' => false,
             'message' => 'Bejelentkezés sikertelen!'

@@ -2,6 +2,7 @@
 
 namespace Illuminate\Foundation\Http;
 
+use App\Http\Middleware\AdminApiToken;
 use Carbon\CarbonInterval;
 use DateTimeInterface;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -70,7 +71,9 @@ class Kernel implements KernelContract
      *
      * @deprecated
      */
-    protected $routeMiddleware = [];
+    protected $routeMiddleware = [
+        'admin.token' => AdminApiToken::class,
+    ];
 
     /**
      * The application's middleware aliases.

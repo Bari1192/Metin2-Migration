@@ -18,12 +18,6 @@
                         <div class="text-center">
                             <h3 class="text-white font-semibold mb-4">Tippek & Trükkök</h3>
                             <ul class="space-y-2">
-                                 <li>
-                                    <RouterLink to="/movingcalculator"
-                                        class="text-gray-400 hover:text-pink-500 transition-colors duration-200 ease-in-out font-semibold">
-                                        Moving
-                                        Calculator</RouterLink>
-                                </li>
                                 <li>
                                     <RouterLink to="/marketsearch"
                                         class="text-gray-400 hover:text-pink-500 transition-colors duration-200 ease-in-out font-semibold">

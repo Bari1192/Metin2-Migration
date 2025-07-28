@@ -22,13 +22,14 @@ const formatNumber = (num) => num.toLocaleString("hu-HU");
         <div class="mt-8 w-full h-full">
             <div class="container w-full h-full mx-auto px-8">
                 <div class="w-full h-full mx-auto flex justify-center">
-                    <h1 class="mx-auto text-3xl leading-10 font-extrabold tracking-wider text-center">
-                        Valami újra vágysz? Betekintenél másik ország szerverére, piacára átváltás nélkül?
+                    <h1 class="mx-auto text-3xl leading-10 font-extrabold tracking-wider space-y-4 text-center">
+                        <p>Betekintenél más szerver piacára átváltás előtt?</p>
+                         <p>Érdekel egy tárgy ára, de nem elérhető a betekintés üvege?</p>
                     </h1>
                 </div>
                 <div class="w-full h-full mx-auto flex justify-center mt-4">
                     <p class="mx-auto text-lg italic tracking-wider text-start">
-                        Összegyűjtöttem számodra, hogy neked már ne kelljen!</p>
+                        Összegyűjtöttem számodra az általam tapasztalakat, hogy neked már ne kelljen!</p>
                 </div>
                 <!-- <div class="w-full h-full mx-auto mt-8 ">
                     <ul
@@ -83,20 +84,20 @@ const formatNumber = (num) => num.toLocaleString("hu-HU");
                             </div>
 
                             <div class="h-fit w-full flex justify-center mx-auto">
-                                <div class="flex justify-center items-center gap-2 md:gap-2 mx-auto mt-4 align-middle">
+                                <div class="flex justify-center items-center gap-2 lg:gap-5 md:gap-2 mx-auto mt-4 align-middle">
                                     <div
                                         class="flex flex-col justify-center items-center opacity-50 cursor-not-allowed">
                                         <!-- még készül!-->
                                         <PolskaFlag class="w-4 h-4 md:w-8 md:h-8 opacity-90" />
                                         <span
-                                            class="text-[8px] md:text-sm lg:text-base text-gray-400/90 font-semibold pt-1">Polska</span>
+                                            class="text-[8px] md:text-sm lg:text-base text-gray-400/90 font-semibold pt-1">Lengyel</span>
                                     </div>
                                     <div class="mx-auto w-[2px] h-[80%] bg-slate-400/25">
                                     </div>
                                     <div class="flex flex-col justify-center items-center">
                                         <HungaryFlag class="w-4 h-4 md:w-8 md:h-8 opacity-90" />
                                         <span
-                                            class="text-[8px] md:text-sm lg:text-base text-gray-400/90 font-semibold pt-1">Magyar</span>
+                                            class="text-[8px] md:text-sm lg:text-base xl:text-lg text-yellow-400/90 font-semibold pt-1">Magyar</span>
                                     </div>
                                 </div>
                             </div>
@@ -288,7 +289,7 @@ const formatNumber = (num) => num.toLocaleString("hu-HU");
                                         <td class="hidden sm:block px-1 lg:p-2 text-left lg:font-semibold lg:tracking-wider max-w-fit mx-auto"
                                             v-if="item.icon">
                                             <img :src="item.icon" :alt="item.name" :title="item.name"
-                                                :class="item.group == 'vért' || item.group == 'fegyver' ? 'h-6 w-4 md:h-8 md:w-5 lg:h-10 lg:w-6 mx-auto' : 'p-1 max-h-6 max-w-6'">
+                                                :class="item.group == 'vért' || item.group == 'fegyver' ? 'h-6 w-4 md:h-8 md:w-5 lg:h-10 lg:w-6 mx-auto' : 'p-1 max-h-6 max-w-6 lg:max-w-12 lg:max-h-8 lg:py-0.5'">
                                         </td>
                                         <td v-else
                                             class="px-1 lg:p-2 text-left lg:font-semibold lg:tracking-wider max-w-fit mx-auto">

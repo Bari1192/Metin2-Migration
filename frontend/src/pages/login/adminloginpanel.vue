@@ -1,9 +1,9 @@
 <template>
     <!-- <BaseHeader /> -->
     <div class="container mx-auto flex justify-center items-center w-full min-h-screen">
-        <div class="login-box">
-            <h2>Admin belépés</h2>
-            <form @submit.prevent="onLogin" class="text-black">
+        <div class="login-box space-y-2">
+            <h2 class="text-base lg:text-xl font-semibold">Admin belépés</h2>
+            <form @submit.prevent="onLogin" class="text-black lg:space-y-4 font-semibold">
                 <input v-model="username" placeholder="Felhasználónév" required autocomplete="username" />
                 <input v-model="password" type="password" placeholder="Jelszó" required
                     autocomplete="current-password" />
@@ -21,6 +21,9 @@
 import { ref } from 'vue'
 import BaseFooter from '@components/layout/BaseFooter.vue'
 import { http } from '@utils/http.mjs'
+import { localdev } from '@utils/localdev.mjs'
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const username = ref('')
 const password = ref('')
@@ -31,14 +34,22 @@ const onLogin = async () => {
     feedback.value = ''
     loginSuccess.value = false
     try {
+        console.log("Küldött token:", import.meta.env.VITE_ADMIN_API_TOKEN);
         const response = await http.post('/admin/login', {
             username: username.value,
             password: password.value
-        });
-        if (response.data.success && response.data.token) {
+        },
+            {
+                headers: {
+                    'Authorization': `Bearer ${import.meta.env.VITE_ADMIN_API_TOKEN}`
+                }
+            },
+        );
+        if (response.data.success) {
             feedback.value = 'Sikeres bejelentkezés!';
             loginSuccess.value = true;
-            sessionStorage.setItem('adminToken', response.data.token);
+            sessionStorage.setItem('adminToken', import.meta.env.VITE_ADMIN_API_TOKEN)
+            router.push("/admin-control-panel");
         } else {
             feedback.value = 'Bejelentkezés sikertelen!';
             loginSuccess.value = false;
@@ -46,8 +57,10 @@ const onLogin = async () => {
     } catch (e) {
         feedback.value = 'Bejelentkezés sikertelen!'
         loginSuccess.value = false
+        console.error(e);
     }
 }
+
 </script>
 
 <style scoped>
@@ -76,6 +89,15 @@ button {
     font-weight: bold;
     cursor: pointer;
     margin-top: 1.1rem;
+}
+
+button:hover {
+    background: #228a8e;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1.1rem;
+    transition: all 150ms ease-in-out;
 }
 
 .success {
