@@ -1,17 +1,26 @@
 <script setup>
 import BaseHeader from '@components/layout/BaseHeader.vue';
 import BaseFooter from '@components/layout/BaseFooter.vue';
+import BaseSpinner from '@components/layout/BaseSpinner.vue'
 import PolskaFlag from '@assets/svgs/PolskaFlag.vue';
 import HungaryFlag from '@assets/svgs/HungaryFlag.vue';
 import { storeToRefs } from 'pinia';
-import { hungaryStore } from '@stores/ItemStore_Hungary.mjs';
+import { useHungaryStore } from '@stores/HungaryItemsStore.mjs';
+import { onMounted } from 'vue';
 
-const itemStore = hungaryStore();
-const { searchQuery, filteredItems } = storeToRefs(itemStore);
+const itemStore = useHungaryStore();
+const { searchQuery, filteredItems, error, loading } = storeToRefs(itemStore);
 const setCategory = (category) => {
     itemStore.setCategory(category);
 };
-const formatNumber = (num) => num.toLocaleString("hu-HU");
+
+onMounted(async () => {
+    await itemStore.getItems();
+});
+const formatNumber = (num) => {
+    if (num == null || num === "") return "";
+    return num.toLocaleString("hu-HU");
+};
 </script>
 
 <template>
@@ -24,7 +33,7 @@ const formatNumber = (num) => num.toLocaleString("hu-HU");
                 <div class="w-full h-full mx-auto flex justify-center">
                     <h1 class="mx-auto text-3xl leading-10 font-extrabold tracking-wider space-y-4 text-center">
                         <p>Betekintenél más szerver piacára átváltás előtt?</p>
-                         <p>Érdekel egy tárgy ára, de nem elérhető a betekintés üvege?</p>
+                        <p>Érdekel egy tárgy ára, de nem elérhető a betekintés üvege?</p>
                     </h1>
                 </div>
                 <div class="w-full h-full mx-auto flex justify-center mt-4">
@@ -45,7 +54,7 @@ const formatNumber = (num) => num.toLocaleString("hu-HU");
                 </div> -->
             </div>
 
-            <div class="mx-2 w-fit container my-8 lg:w-full h-full lg:mx-auto justify-center 
+            <div v-if="!loading" class="mx-2 w-fit container my-8 lg:w-full h-full lg:mx-auto justify-center 
             rounded-t-lg rounded-b-lg border-2 shadow-lg shadow-indigo-950 border-indigo-900/75
             border-b-4 border-r-4 border-r-indigo-900/90 border-b-indigo-900/90
             ">
@@ -84,7 +93,8 @@ const formatNumber = (num) => num.toLocaleString("hu-HU");
                             </div>
 
                             <div class="h-fit w-full flex justify-center mx-auto">
-                                <div class="flex justify-center items-center gap-2 lg:gap-5 md:gap-2 mx-auto mt-4 align-middle">
+                                <div
+                                    class="flex justify-center items-center gap-2 lg:gap-5 md:gap-2 mx-auto mt-4 align-middle">
                                     <div
                                         class="flex flex-col justify-center items-center opacity-50 cursor-not-allowed">
                                         <!-- még készül!-->
@@ -241,13 +251,13 @@ const formatNumber = (num) => num.toLocaleString("hu-HU");
 
                             <div class="w-full h-full mx-auto rounded-bl-md my-3 lg:mt-6">
                                 <div class="flex px-1 w-full h-fit gap-2 lg:mx-auto align-middle justify-center">
-                                    <input v-model="searchQuery" type="text" placeholder="Keresés..."
+                                    <input v-model="searchQuery" type="text" placeholder="Kezdd el gépelni..."
                                         class=" w-full text-[7px] md:text-sm xl:text-base px-3 py-2 rounded-md text-center bg-black border border-gray-600 text-white" />
-                                    <button
+                                    <!-- <button
                                         class="w-1/2 text-[9px] text mx-auto text-center text-gray-300 px-1 rounded-md xl:text-base bg-stone-600/65 border-2 border-stone-300/55 font-semibold"
                                         type="submit">
                                         Keresés
-                                    </button>
+                                    </button> -->
                                 </div>
                                 <p
                                     class="w-full text-[9px] lg:text-[13px] lg:py-1 text-gray-300 lg:text-gray-400 text-center italic font-extrathin mt-2">
@@ -266,8 +276,7 @@ const formatNumber = (num) => num.toLocaleString("hu-HU");
                                     <tr class="border-b-2 border-b-black/60 bg-stone-500/30 overflow-hidden">
                                         <th class="p-0 m-0 text-xs xl:text-lg lg:px-4 py-2 lg:font-semibold lg:text-base lg:tracking-wider text-center md:text-left"
                                             style="font-family: 'Nunito';">Tétel</th>
-                                        <th class="hidden sm:block"
-                                            style="font-family: 'Nunito';"></th> <!-- Ikon -->
+                                        <th class="hidden sm:block" style="font-family: 'Nunito';"></th> <!-- Ikon -->
                                         <th class="px-1.5 m-0 text-xs xl:text-lg lg:px-4 py-2 lg:font-semibold lg:text-base lg:tracking-wider text-center"
                                             style="font-family: 'Nunito';">Darab</th>
                                         <th class="px-1.5 m-0 text-xs xl:text-lg lg:px-4 py-2 lg:font-semibold lg:text-base lg:tracking-wider text-center"
@@ -276,14 +285,14 @@ const formatNumber = (num) => num.toLocaleString("hu-HU");
                                             style="font-family: 'Nunito';">Yang</th>
                                     </tr>
                                 </thead>
-                                <tbody
-                                    class="mx-auto text-[8px] md:text-sm lg:text-base border-x-2 border-b-2 border-gray-700/70 text-white lg:font-medium 
+                                <tbody class="mx-auto text-[8px] md:text-sm lg:text-base border-x-2 border-b-2 border-gray-700/70 text-white lg:font-medium 
                                     overflow-hidden                                    ">
                                     <tr v-if="searchQuery.value != '' && filteredItems.length < 20"
                                         v-for="item in filteredItems" :key="item.name"
                                         class=" even:bg-gradient-to-r from-stone-950/5 via-stone-950/25 to-stone-950/5">
 
-                                        <td class="pr-1 lg:p-2 pl-1.5 md:px-1 text-left lg:font-semibold lg:tracking-wider max-w-fit">
+                                        <td
+                                            class="pr-1 lg:p-2 pl-1.5 md:px-1 text-left lg:font-semibold lg:tracking-wider max-w-fit">
                                             {{ item.name }}
                                         </td>
                                         <td class="hidden sm:block px-1 lg:p-2 text-left lg:font-semibold lg:tracking-wider max-w-fit mx-auto"
@@ -324,6 +333,10 @@ const formatNumber = (num) => num.toLocaleString("hu-HU");
                         </div>
                     </div>
                 </div>
+            </div>
+            <div v-else class="w-full mx-auto min-h-[50svh] flex flex-col items-center justify-center ">
+                <BaseSpinner />
+                <p class="w-full mt-4 font-medium">Adatok betöltés folyamatban...</p>
             </div>
         </div>
     </div>

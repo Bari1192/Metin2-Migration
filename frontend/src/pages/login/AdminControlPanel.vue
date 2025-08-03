@@ -77,7 +77,8 @@
                                         class="bg-gray-800 text-yellow-200 rounded w-full px-2 py-2 lg:font-semibold lg:tracking-wider text-center" />
                                 </td>
                                 <td class="p-2 w-fit ">
-                                    <input v-model.number="item.price_yang" type="number"
+                                    <input :value="formatNumber(item.price_yang)"
+                                        @input="item.price_yang = parseNumber($event.target.value)" type="text"
                                         class="bg-gray-800 text-green-200 rounded w-full px-2 py-2 lg:font-semibold lg:tracking-wider text-center" />
                                 </td>
                                 <td class="p-2 w-fit">
@@ -167,12 +168,20 @@ async function saveItem(item) {
     try {
         const response = await hungaryStore.updateItem(identifier, item)
         alert('Item sikeresen frissítve!')
-        console.log(response.data);
         await hungaryStore.getItems();
     }
     catch (error) {
         alert(`Hiba: ${error.value}`)
     }
+}
+function formatNumber(num) {
+    if (num == null || num === "") return "";
+    return Number(num).toLocaleString("hu-HU");
+}
+
+function parseNumber(str) {
+    if (typeof str !== "string") return 0;
+    return Number(str.replace(/\s/g, "").replace(/\./g, "").replace(/,/g, ""));
 }
 </script>
 

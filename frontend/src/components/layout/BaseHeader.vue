@@ -26,17 +26,8 @@
 
       <!-- DESKTOP - LG-től!! -->
       <ul class="hidden lg:flex flex-1 flex-row flex-wrap justify-end items-center gap-4 w-full">
-
         <li class="nav-item">
-          <RouterLink to="/adminpanel" class="movingcalculator" @click="toggleMenu">
-            <div class="nav-link secondary-gradient">
-              <i class="fa-solid fa-calculator mr-2"></i>
-              <p class="movingcalculator">Admin Control Panel</p>
-            </div>
-          </RouterLink>
-        </li>
-        <li class="nav-item">
-          <RouterLink to="/marketsearch" @click="toggleMenu">
+          <RouterLink to="/marketsearch">
             <div class="nav-link tertiary-gradient">
               <i class="fa-solid fa-magnifying-glass mr-2"></i>
               <p class="movingcalculator">Market Searching</p>
@@ -97,14 +88,6 @@
             </svg>
           </button>
           <ul class="nav-item-group mx-3">
-            <li class="nav-item">
-              <RouterLink to="/adminpanel" class="movingcalculator" @click="toggleMenu">
-                <div class="nav-link secondary-gradient">
-                  <i class="fa-solid fa-calculator mr-2"></i>
-                  <p class="movingcalculator">Admin Control Panel</p>
-                </div>
-              </RouterLink>
-            </li>
             <li class="nav-item">
               <RouterLink to="/marketsearch" @click="toggleMenu">
                 <div class="nav-link tertiary-gradient">

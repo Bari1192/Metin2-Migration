@@ -92,7 +92,7 @@ export const useHungaryStore = defineStore("items", () => {
       if (!authHeaders.Authorization) {
         throw new Error("Nincs jogosultságod ehhez a művelethez!");
       }
-      const resp = await http.post(`/items/${identifier}`, itemData, {
+      const resp = await http.put(`/items/${identifier}`, itemData, {
         headers: authHeaders,
       });
 
