@@ -31,11 +31,10 @@ import { useAuthStore } from '@stores/AuthStore'
 const router = useRouter()
 const authStore = useAuthStore()
 
-const username = ref('')
-const password = ref('')
+const username = ref('Metin2MigrationAdminPanelLogin')
+const password = ref('verytitkosítottjelszohashtagfarmingNeVeRdAJ')
 const feedback = ref('')
 const loading = ref(false)
-
 async function handleLogin() {
     if (!username.value || !password.value) {
         feedback.value = 'Minden mező kitöltése kötelező!'

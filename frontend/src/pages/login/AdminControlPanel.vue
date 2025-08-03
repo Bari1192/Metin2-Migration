@@ -123,6 +123,7 @@ const authStore = useAuthStore()
 const hungaryStore = useHungaryStore()
 
 const authLoading = ref(true)
+const result = ref('');
 
 const newItem = ref({
     name: '',
@@ -161,26 +162,16 @@ function retryAuth() {
     router.push('/adminpanel')
 }
 
-// async function handleCreateItem() {
-//     const result = await hungaryStore.createItem({ ...newItem.value })
-//     if (result.success) {
-//         newItem.value = { name: '', group: '', price: 0, price_yang: 0, quantity: 1 }
-//         alert('Item sikeresen létrehozva!')
-//     } else if (result.needsAuth) {
-//         router.push('/adminlogin')
-//     } else {
-//         alert(`Hiba: ${result.error}`)
-//     }
-// }
-
 async function saveItem(item) {
     const identifier = item.id || item.name
-    const result = await hungaryStore.updateItem(identifier, item)
-    if (result.success) {
+    try {
+        const response = await hungaryStore.updateItem(identifier, item)
         alert('Item sikeresen frissítve!')
+        console.log(response.data);
         await hungaryStore.getItems();
-    } else {
-        alert(`Hiba: ${result.error}`)
+    }
+    catch (error) {
+        alert(`Hiba: ${error.value}`)
     }
 }
 </script>
