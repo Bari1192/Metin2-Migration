@@ -1,15 +1,20 @@
 <template>
-    <!-- <BaseHeader /> -->
     <div class="container mx-auto flex justify-center items-center w-full min-h-screen">
         <div class="login-box space-y-2">
             <h2 class="text-base lg:text-xl font-semibold">Admin belépés</h2>
-            <form @submit.prevent="onLogin" class="text-black lg:space-y-4 font-semibold">
+            <form @submit.prevent="handleLogin()" class="text-black lg:space-y-4 font-semibold">
                 <input v-model="username" placeholder="Felhasználónév" required autocomplete="username" />
                 <input v-model="password" type="password" placeholder="Jelszó" required
                     autocomplete="current-password" />
-                <button type="submit">Bejelentkezés</button>
+                <button type="submit" :disabled="loading">
+                    {{ loading ? 'Bejelentkezés...' : 'Bejelentkezés' }}
+                </button>
             </form>
-            <div v-if="feedback" :class="{ 'success': loginSuccess, 'error': !loginSuccess }">
+            
+            <div v-if="feedback" class="feedback" :class="{
+                'success': feedback.includes('Sikeres'),
+                'error': !feedback.includes('Sikeres')
+            }">
                 {{ feedback }}
             </div>
         </div>
@@ -20,47 +25,43 @@
 <script setup>
 import { ref } from 'vue'
 import BaseFooter from '@components/layout/BaseFooter.vue'
-import { http } from '@utils/http.mjs'
-import { localdev } from '@utils/localdev.mjs'
-import { useRouter } from "vue-router";
-const router = useRouter();
+import { useRouter } from "vue-router"
+import { useAuthStore } from '@stores/AuthStore'
+
+const router = useRouter()
+const authStore = useAuthStore()
 
 const username = ref('')
 const password = ref('')
 const feedback = ref('')
-const loginSuccess = ref(false)
+const loading = ref(false)
 
-const onLogin = async () => {
+async function handleLogin() {
+    if (!username.value || !password.value) {
+        feedback.value = 'Minden mező kitöltése kötelező!'
+        return
+    }
+
+    loading.value = true
     feedback.value = ''
-    loginSuccess.value = false
+
     try {
-        console.log("Küldött token:", import.meta.env.VITE_ADMIN_API_TOKEN);
-        const response = await http.post('/admin/login', {
-            username: username.value,
-            password: password.value
-        },
-            {
-                headers: {
-                    'Authorization': `Bearer ${import.meta.env.VITE_ADMIN_API_TOKEN}`
-                }
-            },
-        );
-        if (response.data.success) {
-            feedback.value = 'Sikeres bejelentkezés!';
-            loginSuccess.value = true;
-            sessionStorage.setItem('adminToken', import.meta.env.VITE_ADMIN_API_TOKEN)
-            router.push("/admin-control-panel");
-        } else {
-            feedback.value = 'Bejelentkezés sikertelen!';
-            loginSuccess.value = false;
+        const result = await authStore.login(username.value, password.value)
+        
+        if (result.success) {
+            feedback.value = 'Sikeres bejelentkezés!'
+            
+            setTimeout(() => {
+                router.push('/admin-control-panel')
+            }, 1000)
         }
-    } catch (e) {
-        feedback.value = 'Bejelentkezés sikertelen!'
-        loginSuccess.value = false
-        console.error(e);
+    } catch (error) {
+        console.error('Login error:', error)
+        feedback.value = error.message || 'Bejelentkezés sikertelen!'
+    } finally {
+        loading.value = false
     }
 }
-
 </script>
 
 <style scoped>
@@ -74,8 +75,7 @@ const onLogin = async () => {
     box-shadow: 0 2px 12px #23293644;
 }
 
-input,
-button {
+input, button {
     margin-top: 0.6rem;
     width: 100%;
     padding: 0.55rem;
@@ -91,22 +91,33 @@ button {
     margin-top: 1.1rem;
 }
 
-button:hover {
+button:hover:not(:disabled) {
     background: #228a8e;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 1.1rem;
     transition: all 150ms ease-in-out;
 }
 
-.success {
-    color: #43ef5e;
-    margin-top: 12px;
+button:disabled {
+    background: #6b7280;
+    cursor: not-allowed;
 }
 
-.error {
-    color: #fa6060;
-    margin-top: 12px;
+.feedback {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.feedback.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.feedback.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
 </style>

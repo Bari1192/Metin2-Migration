@@ -31,7 +31,7 @@
           <RouterLink to="/adminpanel" class="movingcalculator" @click="toggleMenu">
             <div class="nav-link secondary-gradient">
               <i class="fa-solid fa-calculator mr-2"></i>
-              <p class="movingcalculator">Moving Calculator</p>
+              <p class="movingcalculator">Admin Control Panel</p>
             </div>
           </RouterLink>
         </li>
@@ -44,7 +44,7 @@
           </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink to="/news1">
+          <RouterLink to="/">
             <div class="nav-link-subtle">
               <i class="fas fa-info-circle mr-2"></i>
               <p class="aboutus">About Us</p>
@@ -52,7 +52,7 @@
           </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink to="/news2" class="info-link">
+          <RouterLink to="/" class="info-link">
             <div class="nav-link-subtle">
               <i class="fas fa-users mr-2"></i>
               <p class="whoweare">Who We Are</p>
@@ -60,7 +60,7 @@
           </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink to="/news3" class="info-link">
+          <RouterLink to="/" class="info-link">
             <div class="nav-link-subtle">
               <i class="fas fa-headset mr-2"></i>
               <p class="support">Support</p>
@@ -68,14 +68,14 @@
           </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink to="/news3">
+          <RouterLink to="/">
             <div class="dashboard-icon">
               <i class="fa-solid fa-chalkboard"></i>
             </div>
           </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink to="/news">
+          <RouterLink to="/">
             <button class="action-button">
               <i class="fa-solid fa-magnifying-glass mr-2"></i>
               Show On News
@@ -101,7 +101,7 @@
               <RouterLink to="/adminpanel" class="movingcalculator" @click="toggleMenu">
                 <div class="nav-link secondary-gradient">
                   <i class="fa-solid fa-calculator mr-2"></i>
-                  <p class="movingcalculator">Moving Calculator</p>
+                  <p class="movingcalculator">Admin Control Panel</p>
                 </div>
               </RouterLink>
             </li>
@@ -114,7 +114,7 @@
               </RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="/news1">
+              <RouterLink to="/">
                 <div class="nav-link-subtle">
                   <i class="fas fa-info-circle mr-2"></i>
                   <p class="aboutus">About Us</p>
@@ -122,7 +122,7 @@
               </RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="/news2" class="info-link">
+              <RouterLink to="/" class="info-link">
                 <div class="nav-link-subtle">
                   <i class="fas fa-users mr-2"></i>
                   <p class="whoweare">Who We Are</p>
@@ -130,7 +130,7 @@
               </RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="/news3" class="info-link">
+              <RouterLink to="/" class="info-link">
                 <div class="nav-link-subtle">
                   <i class="fas fa-headset mr-2"></i>
                   <p class="support">Support</p>
@@ -147,12 +147,12 @@
             </li>
             <li class="nav-item">
               <div class="grid grid-cols-4 w-full h-fit justify-center items-center align-middle mx-auto">
-                <RouterLink to="/news3" class="col-span-1">
+                <RouterLink to="/" class="col-span-1">
                   <button class="dashboard-icon w-fit mx-auto p-3">
                     <i class="fa-solid fa-chalkboard"></i>
                   </button>
                 </RouterLink>
-                <RouterLink to="/news" class="col-span-3">
+                <RouterLink to="/" class="col-span-3">
                   <button class="action-button mx-auto text-base p-3">
                     <i class="fa-solid fa-magnifying-glass mr-2"></i>
                     Show On News

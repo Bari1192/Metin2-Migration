@@ -3,14 +3,16 @@
         <div class="w-full max-w-[90%] lg:max-w-7xl md:max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 sm:gap-8 mb-8">
                 <div class="w-full sm:col-span-2 lg:col-span-1">
-                    <img src="../../assets/img/logos/GrayZone_logo.png" alt="GrayZone Life Hacks"
-                        class="w-auto h-16 sm:h-24 object-contain mx-auto">
-                    <p class="text-gray-200 text-sm font-semibold mt-2 text-center italic">
-                        Smart shopping before moving
-                    </p>
-                    <p class="text-gray-400 text-sm mt-1 text-center">
-                        Save time, money and effort with us. Check and calculate all item's price fast.
-                    </p>
+                    <router-link to="/">
+                        <img src="../../assets/img/logos/GrayZone_logo.png" alt="GrayZone Life Hacks"
+                            class="w-auto h-16 sm:h-24 object-contain mx-auto">
+                        <p class="text-gray-200 text-sm font-semibold mt-2 text-center italic">
+                            Smart shopping before moving
+                        </p>
+                        <p class="text-gray-400 text-sm mt-1 text-center">
+                            Save time, money and effort with us. Check and calculate all item's price fast.
+                        </p>
+                    </router-link>
                 </div>
 
                 <div class="w-full sm:col-span-2 mx-auto lg:col-span-2">

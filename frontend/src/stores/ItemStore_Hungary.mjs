@@ -94,6 +94,7 @@ export const hungaryStore = defineStore("items", () => {
 
  const searchQuery = ref("");
   const selectedCategory = ref("");
+  
   const filteredItems = computed(() => {
     if (searchQuery.value && searchQuery.value.trim() !== "") {
       return hungaryItems.value.filter((item) =>
