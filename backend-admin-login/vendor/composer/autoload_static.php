@@ -54,6 +54,9 @@ class ComposerStaticInitba7f5314bed9a77e322b5f46666787bb
         ),
         'T' => 
         array (
+            'Turso\\Driver\\Laravel\\Tests\\' => 27,
+            'Turso\\Driver\\Laravel\\Database\\Factories\\' => 40,
+            'Turso\\Driver\\Laravel\\' => 21,
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
             'Termwind\\' => 9,
@@ -91,9 +94,11 @@ class ComposerStaticInitba7f5314bed9a77e322b5f46666787bb
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Clock\\' => 24,
+            'Spatie\\LaravelPackageTools\\' => 27,
         ),
         'R' => 
         array (
+            'RichanFongdasen\\Turso\\' => 22,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -194,6 +199,18 @@ class ComposerStaticInitba7f5314bed9a77e322b5f46666787bb
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Turso\\Driver\\Laravel\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/tests',
+        ),
+        'Turso\\Driver\\Laravel\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/database/factories',
+        ),
+        'Turso\\Driver\\Laravel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -330,6 +347,14 @@ class ComposerStaticInitba7f5314bed9a77e322b5f46666787bb
         'Symfony\\Component\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/clock',
+        ),
+        'Spatie\\LaravelPackageTools\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-package-tools/src',
+        ),
+        'RichanFongdasen\\Turso\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -537,7 +562,13 @@ class ComposerStaticInitba7f5314bed9a77e322b5f46666787bb
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\ImportItemsFromJson' => __DIR__ . '/../..' . '/app/Console/Commands/ImportItemsFromJson.php',
+        'App\\Http\\Controllers\\AdminAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminAuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\ItemsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ItemsController.php',
+        'App\\Http\\Middleware\\AdminAuthMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminAuthMiddleware.php',
+        'App\\Http\\Requests\\UpdateItemRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateItemRequest.php',
+        'App\\Models\\Item' => __DIR__ . '/../..' . '/app/Models/Item.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -5376,6 +5407,32 @@ class ComposerStaticInitba7f5314bed9a77e322b5f46666787bb
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'RichanFongdasen\\Turso\\Commands\\TursoSyncCommand' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Commands/TursoSyncCommand.php',
+        'RichanFongdasen\\Turso\\Contracts\\TursoQuery' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Contracts/TursoQuery.php',
+        'RichanFongdasen\\Turso\\Database\\TursoConnection' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Database/TursoConnection.php',
+        'RichanFongdasen\\Turso\\Database\\TursoConnector' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Database/TursoConnector.php',
+        'RichanFongdasen\\Turso\\Database\\TursoPDO' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Database/TursoPDO.php',
+        'RichanFongdasen\\Turso\\Database\\TursoPDOStatement' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Database/TursoPDOStatement.php',
+        'RichanFongdasen\\Turso\\Database\\TursoQueryGrammar' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Database/TursoQueryGrammar.php',
+        'RichanFongdasen\\Turso\\Database\\TursoQueryProcessor' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Database/TursoQueryProcessor.php',
+        'RichanFongdasen\\Turso\\Database\\TursoSchemaBuilder' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Database/TursoSchemaBuilder.php',
+        'RichanFongdasen\\Turso\\Database\\TursoSchemaGrammar' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Database/TursoSchemaGrammar.php',
+        'RichanFongdasen\\Turso\\Database\\TursoSchemaState' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Database/TursoSchemaState.php',
+        'RichanFongdasen\\Turso\\Enums\\PdoParam' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Enums/PdoParam.php',
+        'RichanFongdasen\\Turso\\Enums\\TursoType' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Enums/TursoType.php',
+        'RichanFongdasen\\Turso\\Exceptions\\FeatureNotSupportedException' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Exceptions/FeatureNotSupportedException.php',
+        'RichanFongdasen\\Turso\\Exceptions\\TursoQueryException' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Exceptions/TursoQueryException.php',
+        'RichanFongdasen\\Turso\\Facades\\Turso' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Facades/Turso.php',
+        'RichanFongdasen\\Turso\\Http\\QueryResponse' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Http/QueryResponse.php',
+        'RichanFongdasen\\Turso\\Http\\RequestBody' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Http/RequestBody.php',
+        'RichanFongdasen\\Turso\\Http\\ResponseBody' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Http/ResponseBody.php',
+        'RichanFongdasen\\Turso\\Jobs\\TursoSyncJob' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Jobs/TursoSyncJob.php',
+        'RichanFongdasen\\Turso\\Queries\\CloseQuery' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Queries/CloseQuery.php',
+        'RichanFongdasen\\Turso\\Queries\\ExecuteQuery' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Queries/ExecuteQuery.php',
+        'RichanFongdasen\\Turso\\Queries\\Query' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/Queries/Query.php',
+        'RichanFongdasen\\Turso\\TursoClient' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/TursoClient.php',
+        'RichanFongdasen\\Turso\\TursoLaravelServiceProvider' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/TursoLaravelServiceProvider.php',
+        'RichanFongdasen\\Turso\\TursoManager' => __DIR__ . '/..' . '/richan-fongdasen/turso-laravel/src/TursoManager.php',
         'SQLite3Exception' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
@@ -5582,6 +5639,40 @@ class ComposerStaticInitba7f5314bed9a77e322b5f46666787bb
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/type/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/type/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Spatie\\LaravelPackageTools\\Commands\\Concerns\\AskToRunMigrations' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Commands/Concerns/AskToRunMigrations.php',
+        'Spatie\\LaravelPackageTools\\Commands\\Concerns\\AskToStarRepoOnGitHub' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Commands/Concerns/AskToStarRepoOnGitHub.php',
+        'Spatie\\LaravelPackageTools\\Commands\\Concerns\\PublishesResources' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Commands/Concerns/PublishesResources.php',
+        'Spatie\\LaravelPackageTools\\Commands\\Concerns\\SupportsServiceProviderInApp' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Commands/Concerns/SupportsServiceProviderInApp.php',
+        'Spatie\\LaravelPackageTools\\Commands\\Concerns\\SupportsStartWithEndWith' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Commands/Concerns/SupportsStartWithEndWith.php',
+        'Spatie\\LaravelPackageTools\\Commands\\InstallCommand' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Commands/InstallCommand.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessAssets' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessAssets.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessBladeComponents' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessBladeComponents.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessCommands' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessCommands.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessConfigs' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessConfigs.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessInertia' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessInertia.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessMigrations' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessMigrations.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessRoutes' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessRoutes.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessServiceProviders' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessServiceProviders.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessTranslations' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessTranslations.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessViewComposers' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessViewComposers.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessViewSharedData' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessViewSharedData.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\PackageServiceProvider\\ProcessViews' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/PackageServiceProvider/ProcessViews.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasAssets' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasAssets.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasBladeComponents' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasBladeComponents.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasCommands' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasCommands.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasConfigs' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasConfigs.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasInertia' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasInertia.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasInstallCommand' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasInstallCommand.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasMigrations' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasMigrations.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasRoutes' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasRoutes.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasServiceProviders' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasServiceProviders.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasTranslations' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasTranslations.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasViewComposers' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasViewComposers.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasViewSharedData' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasViewSharedData.php',
+        'Spatie\\LaravelPackageTools\\Concerns\\Package\\HasViews' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Concerns/Package/HasViews.php',
+        'Spatie\\LaravelPackageTools\\Exceptions\\InvalidPackage' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Exceptions/InvalidPackage.php',
+        'Spatie\\LaravelPackageTools\\Package' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Package.php',
+        'Spatie\\LaravelPackageTools\\PackageServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/PackageServiceProvider.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Clock\\Clock' => __DIR__ . '/..' . '/symfony/clock/Clock.php',
         'Symfony\\Component\\Clock\\ClockAwareTrait' => __DIR__ . '/..' . '/symfony/clock/ClockAwareTrait.php',
@@ -6726,6 +6817,20 @@ class ComposerStaticInitba7f5314bed9a77e322b5f46666787bb
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+        'Turso\\Driver\\Laravel\\Database\\LibSQLConnection' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Database/LibSQLConnection.php',
+        'Turso\\Driver\\Laravel\\Database\\LibSQLConnectionFactory' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Database/LibSQLConnectionFactory.php',
+        'Turso\\Driver\\Laravel\\Database\\LibSQLConnector' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Database/LibSQLConnector.php',
+        'Turso\\Driver\\Laravel\\Database\\LibSQLDatabase' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Database/LibSQLDatabase.php',
+        'Turso\\Driver\\Laravel\\Database\\LibSQLPDOStatement' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Database/LibSQLPDOStatement.php',
+        'Turso\\Driver\\Laravel\\Database\\LibSQLQueryGrammar' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Database/LibSQLQueryGrammar.php',
+        'Turso\\Driver\\Laravel\\Database\\LibSQLQueryProcessor' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Database/LibSQLQueryProcessor.php',
+        'Turso\\Driver\\Laravel\\Database\\LibSQLSchemaBuilder' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Database/LibSQLSchemaBuilder.php',
+        'Turso\\Driver\\Laravel\\Database\\LibSQLSchemaGrammar' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Database/LibSQLSchemaGrammar.php',
+        'Turso\\Driver\\Laravel\\Database\\LibSQLSchemaState' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Database/LibSQLSchemaState.php',
+        'Turso\\Driver\\Laravel\\Exceptions\\ConfigurationIsNotFound' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Exceptions/ConfigurationIsNotFound.php',
+        'Turso\\Driver\\Laravel\\Exceptions\\FeatureNotSupportedException' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/Exceptions/FeatureNotSupportedException.php',
+        'Turso\\Driver\\Laravel\\LibSQLDriverServiceProvider' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/LibSQLDriverServiceProvider.php',
+        'Turso\\Driver\\Laravel\\LibSQLManager' => __DIR__ . '/..' . '/tursodatabase/turso-driver-laravel/src/LibSQLManager.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',

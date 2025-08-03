@@ -16,5 +16,6 @@
 /public/build
 /public/hot
 FROM php:8.2-fpm
+vendor
 
 

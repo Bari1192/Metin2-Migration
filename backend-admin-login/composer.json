@@ -10,8 +10,10 @@
         "laravel/pail": "^1.1",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "richan-fongdasen/turso-laravel": "^1.0",
         "symfony/http-client": "^7.1",
-        "symfony/postmark-mailer": "^7.1"
+        "symfony/postmark-mailer": "^7.1",
+        "tursodatabase/turso-driver-laravel": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
