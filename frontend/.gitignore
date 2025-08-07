@@ -1,2 +1,9 @@
 node_modules
 dist
+.env
+.env.example
+*.log
+.DS_Store
+.env
+.env.backup
+.env.production
