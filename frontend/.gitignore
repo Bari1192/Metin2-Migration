@@ -9,3 +9,5 @@ dist
 env
 env.backup
 env.production
+frontend/.env
+frontend/.env
