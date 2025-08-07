@@ -1,9 +1,11 @@
 node_modules
 dist
 .env
+.env.backup
 .env.example
+.env.production
 *.log
 .DS_Store
-.env
-.env.backup
-.env.production
+env
+env.backup
+env.production
