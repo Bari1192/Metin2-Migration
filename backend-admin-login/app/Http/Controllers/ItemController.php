@@ -2,43 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
+use App\Http\Resources\ItemResource;
 use App\Models\Item;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class ItemController extends Controller
 {
-    // GET - összes item lekérése
     public function index()
     {
         $items = Item::all();
         return response()->json($items);
     }
 
-    // PUT - item frissítése
     public function update(UpdateItemRequest $request)
     {
         $data = $request->validated();
-        
         $item = Item::where('name', $data['name'])->first();
-        
         if (!$item) {
             return response()->json([
-                'success' => false, 
+                'success' => false,
                 'msg' => 'Ez az Item nem található az adatbázisban ezzel a névvel!'
             ], 404);
         }
-
         $item->update($data);
-
-        return response()->json(['success' => true, 'data' => $item]);
+        return response()->json([
+            'success' => true,
+            'data' => $item,
+        ]);
     }
-
-    // POST - új item létrehozása
-    public function store(Request $request)
+    public function store(StoreItemRequest $request)
     {
-        $item = Item::create($request->validated());
-        return response()->json(['success' => true, 'data' => $item]);
+        $data = $request->validated();
+
+        try {
+            $item = Item::create($data);
+            $this->addItemToJsonFile($data);
+            new ItemResource($item);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Item létrehozása sikertelen: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     // DELETE - item törlése
@@ -47,5 +56,24 @@ class ItemController extends Controller
         $item = Item::findOrFail($id);
         $item->delete();
         return response()->json(['success' => true]);
+    }
+
+    // Kiegészítő függvények, a clean-code miatt
+    private function addItemToJsonFile($itemData)
+    {
+        $filePath = storage_path('app/private/ItemStore_Hungary.json');
+
+        if (file_exists($filePath)) {
+            $jsonContent = file_get_contents($filePath);
+            $storeItems = json_decode($jsonContent, true);
+
+            if (is_array($storeItems)) {
+                $storeItems[] = $itemData;
+                file_put_contents(
+                    $filePath,
+                    json_encode($storeItems, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+                );
+            }
+        }
     }
 }

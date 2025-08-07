@@ -2,65 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class AdminAuthController extends Controller
 {
-    private function getTokenFilePath(): string
+   public function login(Request $request): JsonResponse
     {
-        return storage_path('admins.json');
-    }
-
-    private function loadActiveTokens(): array
-    {
-        $tokenFile = $this->getTokenFilePath();
-
-        if (!file_exists($tokenFile)) {
-            return [];
-        }
-
-        $tokens = json_decode(file_get_contents($tokenFile), true);
-        return is_array($tokens) ? $tokens : [];
-    }
-
-    private function saveActiveTokens(array $tokens): void
-    {
-        $tokenFile = $this->getTokenFilePath();
-        file_put_contents($tokenFile, json_encode($tokens));
-    }
-
-    public function login(Request $request): JsonResponse
-    {
-        Log::info('🚀 Login attempt started');
-
         $adminUser = env('ADMIN_USER');
         $adminPass = env('ADMIN_PASS');
 
         $inputUser = $request->input('username') ?? '';
         $inputPass = $request->input('password') ?? '';
 
-        Log::info('👤 Attempting login for user: ' . $inputUser);
-
         if ($inputUser === $adminUser && $inputPass === $adminPass) {
-            Log::info('✅ Credentials match - creating token');
+            $payload = [
+                'username' => $adminUser,
+                'role' => 'admin',
+                'iat' => time(),
+                'exp' => time() + 60 * 60 * 24 // Token 24 óráig érvényes!
+            ];
 
-            // Erős token generálás
-            $token = bin2hex(random_bytes(32));
-
-            // Aktív tokenek betöltése és új token hozzáadása
-            $activeTokens = $this->loadActiveTokens();
-            $activeTokens[] = $token;
-
-            // Tokenek mentése
-            $this->saveActiveTokens($activeTokens);
-
-            Log::info('🎉 Token created and saved');
+            $jwt = JWT::encode($payload, env('JWT_SECRET'), 'HS256');
 
             return response()->json([
                 'success' => true,
-                'token' => $token,
+                'token' => $jwt,
                 'role' => 'admin',
                 'user' => [
                     'username' => $adminUser,
@@ -69,7 +39,6 @@ class AdminAuthController extends Controller
             ]);
         }
 
-        Log::warning('❌ Login failed - credentials mismatch');
         return response()->json([
             'success' => false,
             'message' => 'Bejelentkezés sikertelen!'
@@ -78,46 +47,37 @@ class AdminAuthController extends Controller
 
     public function check(Request $request): JsonResponse
     {
-        $token = $request->bearerToken();
+        try {
+            $token = $request->bearerToken();
 
-        if (!$token) {
-            return response()->json([
-                'authenticated' => false,
-                'message' => 'Token hiányzik!'
-            ], 401);
-        }
+            if (!$token) {
+                return response()->json([
+                    'authenticated' => false,
+                    'message' => 'Token hiányzik!'
+                ], 401);
+            }
 
-        $activeTokens = $this->loadActiveTokens();
+            $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
 
-        if (in_array($token, $activeTokens)) {
             return response()->json([
                 'authenticated' => true,
-                'role' => 'admin',
+                'role' => $decoded->role,
                 'user' => [
-                    'username' => env('ADMIN_USER'),
-                    'role' => 'admin'
+                    'username' => $decoded->username,
+                    'role' => $decoded->role
                 ]
             ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'authenticated' => false,
+                'message' => 'Érvénytelen vagy lejárt token!'
+            ], 401);
         }
-
-        return response()->json([
-            'authenticated' => false,
-            'message' => 'Érvénytelen token!'
-        ], 401);
     }
 
     public function logout(Request $request): JsonResponse
     {
-        $token = $request->bearerToken();
-
-        if ($token) {
-            $activeTokens = $this->loadActiveTokens();
-            $activeTokens = array_filter($activeTokens, fn($t) => $t !== $token);
-            $this->saveActiveTokens(array_values($activeTokens));
-
-            Log::info('🚪 Token removed from active tokens');
-        }
-
+        // JWT stateless → nincs mit törölni
         return response()->json([
             'success' => true,
             'message' => 'Sikeresen kijelentkeztél!'

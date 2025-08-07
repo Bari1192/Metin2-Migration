@@ -2,39 +2,43 @@
     <div class="container mx-auto flex justify-center items-center w-full min-h-screen">
         <div class="login-box space-y-2">
             <h2 class="text-base lg:text-xl font-semibold">Admin belépés</h2>
+
             <form @submit.prevent="handleLogin()" class="text-black lg:space-y-4 font-semibold">
                 <input v-model="username" placeholder="Felhasználónév" required autocomplete="username" />
                 <input v-model="password" type="password" placeholder="Jelszó" required
                     autocomplete="current-password" />
+
                 <button type="submit" :disabled="loading">
                     {{ loading ? 'Bejelentkezés...' : 'Bejelentkezés' }}
                 </button>
             </form>
-            
+
             <div v-if="feedback" class="feedback" :class="{
-                'success': feedback.includes('Sikeres'),
-                'error': !feedback.includes('Sikeres')
+                success: feedback.includes('Sikeres'),
+                error: !feedback.includes('Sikeres')
             }">
                 {{ feedback }}
             </div>
         </div>
     </div>
+
     <BaseFooter />
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import BaseFooter from '@components/layout/BaseFooter.vue'
-import { useRouter } from "vue-router"
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '@stores/AuthStore'
 
 const router = useRouter()
 const authStore = useAuthStore()
 
-const username = ref('');
-const password = ref('');
-const feedback = ref('');
+const username = ref('')
+const password = ref('')
+const feedback = ref('')
 const loading = ref(false)
+
 async function handleLogin() {
     if (!username.value || !password.value) {
         feedback.value = 'Minden mező kitöltése kötelező!'
@@ -46,10 +50,10 @@ async function handleLogin() {
 
     try {
         const result = await authStore.login(username.value, password.value)
-        
+
         if (result.success) {
             feedback.value = 'Sikeres bejelentkezés!'
-            
+
             setTimeout(() => {
                 router.push('/admin-control-panel')
             }, 1000)
@@ -74,7 +78,8 @@ async function handleLogin() {
     box-shadow: 0 2px 12px #23293644;
 }
 
-input, button {
+input,
+button {
     margin-top: 0.6rem;
     width: 100%;
     padding: 0.55rem;

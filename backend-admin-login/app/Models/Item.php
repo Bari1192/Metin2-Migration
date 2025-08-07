@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     protected $fillable = [
+        'id',
         'name',
+        'price',
         'price_yang',
         'group',
         'icon',
         'quantity',
-        'price'
+        'created_at',
+        'updated_at',
     ];
 
     protected $casts = [

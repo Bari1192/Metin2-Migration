@@ -12,10 +12,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->unsignedInteger('price_yang')->default(0);
-            $table->string('group')->nullable();
+            $table->string('group')->default('egyeb');
             $table->string('icon')->nullable();
             $table->unsignedInteger('quantity')->default(1);;
-            $table->unsignedInteger('price')->default(0);; 
+            $table->unsignedInteger('price')->default(0); 
             $table->timestamps();
         });
     }
