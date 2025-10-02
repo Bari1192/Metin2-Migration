@@ -30,7 +30,50 @@
                     <!-- Kereső -->
                     <div class="search-section">
                         <input v-model="hungaryStore.searchQuery" type="text" class="search-input text-center"
-                            placeholder="Keresés név/kategória szerint..." />
+                            placeholder="Keresés név / kategória szerint..." />
+                    </div>
+
+                    <div class="new-item-wrapper w-1/2 mx-auto my-8">
+                        <h3 class="text-xl font-semibold text-green-400 px-2 py-1 bg-slate-700/70 w-fit rounded-md">Új
+                            tétel felvitele</h3>
+                        <div class="new-item-form space-y-4 mt-2">
+                            <div class="grid grid-cols-2 w-full h-full gap-4">
+                                <input v-model="newItem.name" placeholder="Név" class="input-field name" />
+                                <input v-model="newItem.group" placeholder="Kategória" class="input-field group" />
+                            </div>
+                            <div class=" w-full h-full gap-4 border-b-2 border-sky-200 pb-6">
+                                <div class="flex flex-row grid-cols-4 justify-center items-center align-middle w-full">
+                                    <div class="w-full h-full pr-4 flex align-middle items-center justify-start text-start font-semibold">
+                                        <span class="text-center w-4/5 bg-indigo-300/75 border-2 border-indigo-500/75 rounded-lg py-2 text-lg text-white">Ára:</span>
+                                    </div>
+                                    <div class="w-full grid grid-cols-2 align-middle items-center justify-center gap-4">
+                                        <input v-model.number="newItem.price" type="number" placeholder="Ár (won)"
+                                            class="input-field price text-center" />
+                                        <div class="w-fit text-center text-sky-400 font-semibold text-lg">
+                                            Won
+                                        </div>
+                                    </div>
+                                    <div class="w-full grid grid-cols-2 align-middle items-center justify-center gap-4">
+                                        <input v-model.number="newItem.price_yang" type="number" placeholder="Ár (Yang)"
+                                            class="input-field yang" />
+                                        <div class="w-fit text-center text-amber-400 font-semibold text-lg">
+                                            yang
+                                        </div>
+                                    </div>
+                                    <div class="w-full grid grid-cols-2 align-middle items-center justify-center gap-4">
+                                        <input v-model.number="newItem.quantity" type="number" placeholder="Mennyiség"
+                                            class="input-field qty" />
+                                        <div class="w-fit text-center font-semibold text-lg">
+                                            /db
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-fit mx-auto">
+                                <button @click="addNewItem" :disabled="!validNewItem"
+                                    class="save-btn">Hozzáadás</button>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Táblázat -->
@@ -40,7 +83,7 @@
                                 <tr class="table-header">
                                     <th class="header-cell icon-col">Ikon</th>
                                     <th class="header-cell">Név</th>
-                                    <th class="header-cell">Ár (SÉ)</th>
+                                    <th class="header-cell">Ár (Won)</th>
                                     <th class="header-cell">Ár (Yang)</th>
                                     <th class="header-cell">Kategória</th>
                                     <th class="header-cell">Mennyiség</th>

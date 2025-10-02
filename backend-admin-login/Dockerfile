@@ -21,6 +21,8 @@ COPY . .
 
 RUN composer install
 
+COPY .env.example .env
+
 EXPOSE 8080
 
 CMD php artisan serve --host=0.0.0.0 --port=8080

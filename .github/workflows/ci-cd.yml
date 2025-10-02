@@ -1,0 +1,81 @@
+name: CI/CD for Metin2-Migration
+
+on:
+  push:
+    branches: [ main, adminpanel ]
+    paths:  # Csak változott mappára triggerel – gyorsabb!
+      - 'frontend/**'
+      - 'backend-admin-login/**'
+  pull_request:
+    branches: [ main, adminpanel ]
+
+jobs:
+  frontend-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate .env for Frontend
+        run: |
+          cp .env.example .env
+          echo "APP_ENV=production" >> .env  # Éles mód
+          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
+          echo "APP_URL=https://metin2migration.fly.dev/" >> .env
+          echo "ADMIN_USER=${{ secrets.ADMIN_USER }}" >> .env
+          echo "ADMIN_PASS=${{ secrets.ADMIN_PASS }}" >> .env
+          echo "DB_URL=${{ secrets.DB_URL }}" >> .env
+          echo "DB_TOKEN=${{ secrets.DB_TOKEN }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          # További fix kulcsok, ha kell (pl. TIME_ZONE=Europe/Budapest >> .env)
+      - name: Build Frontend Docker Image
+        run: docker build -t frontend-app:latest .
+      - name: Basic Test Frontend Image
+        run: docker run --rm frontend-app:latest nginx -t  
+
+  backend-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend-admin-login
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate .env for Backend
+        run: |
+          cp .env.example .env
+          echo "APP_ENV=production" >> .env  
+          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
+          echo "APP_URL=https://metin2migration.fly.dev/" >> .env
+          echo "ADMIN_USER=${{ secrets.ADMIN_USER }}" >> .env
+          echo "ADMIN_PASS=${{ secrets.ADMIN_PASS }}" >> .env
+          echo "DB_URL=${{ secrets.DB_URL }}" >> .env
+          echo "DB_TOKEN=${{ secrets.DB_TOKEN }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+      - name: Build Backend Docker Image
+        run: docker build -t backend-app:latest .
+      - name: Basic Test Backend Image
+        run: docker run --rm backend-app:latest php -v  
+
+  deploy:
+    needs: [frontend-build, backend-build]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Fly.io CLI
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy Frontend to Fly.io
+        run: |
+          cd frontend
+          flyctl deploy --image frontend-app:latest --app metin2migration
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_FRONTEND_DEPLOY }}
+      - name: Deploy Backend to Fly.io
+        run: |
+          cd backend-admin-login
+          flyctl deploy --image backend-app:latest --app backend-admin-login
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_BACKEND_DEPLOY }}

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const http = axios.create({
-  baseURL: "https://backend-admin-login.fly.dev/api",
+  baseURL: "http://127.0.0.1:8000/api",
   timeout: 10000,
   withCredentials: false,
   headers: {
