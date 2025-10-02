@@ -3,7 +3,7 @@ name: CI/CD for Metin2-Migration
 on:
   push:
     branches: [ main, adminpanel ]
-    paths:  # Csak változott mappára triggerel – gyorsabb!
+    paths: 
       - 'frontend/**'
       - 'backend-admin-login/**'
   pull_request:
